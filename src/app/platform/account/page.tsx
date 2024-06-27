@@ -1,8 +1,9 @@
 'use client';
 import '@/css/platform/account.css'
 import { Button, TextInput } from '@mantine/core'
-
+import { useRouter } from 'next/navigation';
 export default function Account() {
+    let router = useRouter()
     function accessAccount(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
         // Gets form
@@ -18,6 +19,12 @@ export default function Account() {
             })
         }).then(d=>{/*Basically this just gets .json within promise of fetch so we can get the actual data*/d.json().then(data=>{
             console.log(data)
+            if (data['HORIZ_STAT'] == "LOGGED_IN") {
+                router.push('/platform')
+            } else {
+                let status_bar = document.getElementById('oris-status') as HTMLElement
+                status_bar.innerHTML = 'Invalid credentials. Please try again.'
+            }
         })})
     }
     return (
@@ -26,6 +33,7 @@ export default function Account() {
                 <div className='account-box'>
                     <h1>Oris Account</h1>
                     <p>You can login or create an Oris account through here.</p>
+                    <p id='oris-status'></p>
                     {/* Submits to our function to authenticate */}
                     <form className='access' onSubmit={accessAccount}>
                         <TextInput className='input' variant='filled' label="Email:" type="email" name='email' placeholder='df@avnce.org' required />

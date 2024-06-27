@@ -23,7 +23,6 @@ export async function POST(req: NextRequest) {
         let [saltA, saltB] = [await bcrypt.genSalt(20),await bcrypt.genSalt(20)]
         // Hashes the password
         let hashed_password = await crypto.createHash('sha512').update(`${saltA}${password}${await crypto.createHash('sha256').update(email).digest('hex')}${saltB}`).digest('hex');
-        console.log('Signup Proceedure')
         // Creates the entry into the database
         await db.insert(account).values({
             'email': email,
@@ -59,12 +58,9 @@ export async function POST(req: NextRequest) {
             })
         } else {
             return NextResponse.json({
-                'status': 'Incorrect password.'
+                'status': 'Incorrect password.',
+                'HORIZ_STAT': 'FAILED_TO_LOG_IN'
             })
         }
     }
-    // Our response
-    return NextResponse.json({
-        'status': 'test'
-    })
 }
