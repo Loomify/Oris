@@ -25,13 +25,14 @@ export default function Account() {
             <div className='platform'>
                 <div className='account-box'>
                     <h1>Oris Account</h1>
-                    <p>You can login or create an Oris account through this system.</p>
+                    <p>You can login or create an Oris account through here.</p>
                     {/* Submits to our function to authenticate */}
                     <form className='access' onSubmit={accessAccount}>
                         <TextInput className='input' variant='filled' label="Email:" type="email" name='email' placeholder='df@avnce.org' required />
                         <TextInput className='input' variant='filled' label="Password:" type="password" name='password' placeholder='Password' required />
                         <Button color='#4FC1DF' type='submit'>Access Account</Button>
                     </form>
+                    <p>©{new Date().getFullYear()} Loom.</p>
                 </div>
             </div>
         </>
