@@ -13,6 +13,9 @@
 /.next/
 /out/
 
+# db
+/src/db/migrations/*
+
 # production
 /build
 
