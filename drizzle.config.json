@@ -3,6 +3,6 @@
     "schema": "./src/db/schema.ts",
     "out": "./src/db/migrations",
     "dbCredentials": {
-        "url": "DB_CREDS_HERE"
+        "url": "CONNECTION_STRING_HERE"
     }
 }
