@@ -13,6 +13,8 @@
 /.next/
 /out/
 
+.env
+
 # db
 /src/db/migrations/*
 

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@dotenvx/dotenvx": "^1.0.0",
     "@mantine/carousel": "^7.11.0",
     "@mantine/core": "^7.11.0",
     "@mantine/hooks": "^7.11.0",
