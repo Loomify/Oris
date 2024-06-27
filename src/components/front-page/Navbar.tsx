@@ -11,7 +11,7 @@ export function Navbar() {
             <nav className="navbar">
                 <h1>Oris</h1>
                 <ul>
-                    <Button component={Link} href="/login">Sign Up</Button>
+                    <Button component={Link} href='/platform/account'>Account</Button>
                 </ul>
             </nav>
         </>

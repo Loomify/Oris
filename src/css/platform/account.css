@@ -1,0 +1,17 @@
+.platform {
+    height: 100vh;
+    background-color: rgb(27, 27, 27);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.account-box {
+    display: flex;
+    align-items: baseline;
+    background-color: rgb(44, 44, 44);
+    border-radius: 10px;
+    padding: 10px;
+    flex-direction: column;
+    gap: 0.5em;    
+}
