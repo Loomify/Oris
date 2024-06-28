@@ -1,8 +1,0 @@
-{
-    "dialect": "postgresql",
-    "schema": "./src/db/schema.ts",
-    "out": "./src/db/migrations",
-    "dbCredentials": {
-        "url": "CONNECTION_STRING_HERE"
-    }
-}
