@@ -16,10 +16,7 @@ Oris is a platform that aims to make research more accessible and collaborative 
 ### Steps
 To get started, you will need to clone this repository and install all dependencies seen in the package.json file, which you can do by running ``npm install``. After that, you will need to make a PostgreSQL server and a database and name it whatever you would like since Oris utilizes Postgres as the primary database and note all the connection information down. You will then need to utilize the connection information into the necessary variables by creating a .env file, with you needing to explicitly use the variable names from .env.example.
 
-You will then need to go to drizzle.config.json and enter the connection string for your PostgreSQL database, which looks like this: 
-```postgresql://username:password@host:port/database_name```
-
-and then you will need to run the following commands:
+and then you will need to run the following commands to be able to populate the database by utilizing the credentials that you have set in your environment variables:
 
 ```bash
 npm drizzle-kit generate
