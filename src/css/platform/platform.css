@@ -43,3 +43,28 @@ body {
     margin-right: 2.5em;
     justify-content: center;
 }
+
+.preview {
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    
+}
+
+.image_setup {
+    & {
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    input {
+        border-radius: 10px;
+        background-color: rgb(44, 44, 44);
+        color: white;
+        margin: auto;
+        border: none;
+        text-align: center;
+        width: 90%;
+    }
+}

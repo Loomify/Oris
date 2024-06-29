@@ -8,6 +8,8 @@ import { account, accountInformation } from "@/db/schema"
 import { eq } from "drizzle-orm"
 import { Button, Input, TextInput } from '@mantine/core'
 import Link from 'next/link'
+import PreviewImage from '@/components/platform/PreviewImage'
+import multer from 'multer'
 
 export default async function Platform(args: any) {
     // Save profile info
@@ -83,12 +85,7 @@ export default async function Platform(args: any) {
                                 <h1>Profile</h1>
                                 <p>Fill out your organization and upload a profile picture!</p>
                             </div>
-                            <form method='POST' action={saveFirstLastName}>
-                                <Input type='file' defaultValue={'/image_demo.png'} required />
-                                <TextInput label='Organization Name' variant='filled' name='organization' required />
-                                <br />
-                                <Button type='submit'>Next</Button>
-                            </form>
+                            <PreviewImage />
                         </div>
                     </>
                 ) 
