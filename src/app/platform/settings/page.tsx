@@ -49,7 +49,9 @@ export default async function PlatformSettings(args: any) {
                     <h1>Settings</h1>
                     <p>Update your account settings.</p>
                     <form>
+                        {/* @ts-ignore */}
                         <TextInput label='First Name' name='first_name' placeholder={account_info[0]['first_name']} required />
+                        {/* @ts-ignore */}
                         <TextInput label='Last Name' name='last_name' placeholder={account_info[0]['last_name']} required />
                         <Button type='submit'>Save</Button>
                     </form>
