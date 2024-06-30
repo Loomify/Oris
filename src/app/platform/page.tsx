@@ -13,6 +13,7 @@ import multer from 'multer'
 import Image from 'next/image'
 import { PlatformNavbar } from '@/components/platform/PlatformNavbar'
 import { PlatformSidebar } from '@/components/platform/PlatformSidebar'
+import { Plus, Settings } from 'react-feather'
 
 export default async function Platform(args: any) {
     // Save profile info
@@ -104,11 +105,23 @@ export default async function Platform(args: any) {
                 'organization': account_info[0]['organization'],
                 'user_role': account_info[0]['user_role']
             }} />
-            <div className="body">
+            <div className="platform_body">
                 <PlatformSidebar />
-                <main className='content'>
+                <main className='platform_content'>
                     <h1>Hello, {account_info[0]['first_name']}!</h1>
-                    
+                    <div className='quick_actions'>
+                        <h2>Quick Actions</h2>                   
+                        <div className='platform_actions'>
+                            <a className='platform_action'>
+                                <Plus />
+                                Add Paper
+                            </a>
+                            <Link href={'/platform/settings'} className='platform_action'>
+                                <Settings />
+                                Settings
+                            </Link>
+                        </div>
+                    </div>
                 </main>
             </div>
         </div>

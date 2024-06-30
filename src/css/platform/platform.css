@@ -86,7 +86,48 @@ body {
     }
 }
 
-.body {
+.platform_body {
     display: flex;
     flex: 1;
+}
+
+.platform_content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+}
+
+.platform_actions {
+    & {
+        display: flex;
+        flex-direction: row;
+        border-radius: 10px;
+        gap: 1em;
+    }
+    .platform_action {
+        & {
+            background-color: rgb(14, 14, 14);
+            border-radius: 10px;
+            min-width: 5vw;
+            height: 9vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+        }
+        &:hover {
+            background-color: rgb(20, 20, 20);
+            cursor: pointer;
+        }
+    }
+}
+
+.quick_actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
 }
