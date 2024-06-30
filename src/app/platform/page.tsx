@@ -12,6 +12,7 @@ import PreviewImage from '@/components/platform/PreviewImage'
 import multer from 'multer'
 import Image from 'next/image'
 import { PlatformNavbar } from '@/components/platform/PlatformNavbar'
+import { PlatformSidebar } from '@/components/platform/PlatformSidebar'
 
 export default async function Platform(args: any) {
     // Save profile info
@@ -95,7 +96,7 @@ export default async function Platform(args: any) {
         }
     }
     return (
-        <>
+        <div className="container">
             <PlatformNavbar profileInfo={{
                 'profile_pic': account_info[0]['image_url'] || '/default_pfp.png',
                 'first_name': account_info[0]['first_name'],
@@ -103,15 +104,13 @@ export default async function Platform(args: any) {
                 'organization': account_info[0]['organization'],
                 'user_role': account_info[0]['user_role']
             }} />
-            <h1>Welcome, {account_info[0]['first_name']}!</h1>
-            <p>Your token is: {token['value']}</p>
-            {/* @ts-ignore */}
-            <p>Your email is: {email}</p>
-            <p>Your organization is {account_info[0]['organization']}</p>
-            <p>Your user role is {account_info[0]['user_role']}</p>
-            <p>Your full name is {`${account_info[0]['first_name']} ${account_info[0]['last_name']}`}</p>
-            <Image src={account_info[0]['image_url'] || '/default_pfp.png'} alt='profile picture' className='profile_pic' width={200} height={200} />
-            <Button component={Link} href="/platform/logout">Logout</Button>
-        </>
+            <div className="body">
+                <PlatformSidebar />
+                <main className='content'>
+                    <h1>Hello, {account_info[0]['first_name']}!</h1>
+                    
+                </main>
+            </div>
+        </div>
     )
 }

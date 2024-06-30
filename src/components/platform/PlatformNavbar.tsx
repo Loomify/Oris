@@ -8,7 +8,7 @@ export function PlatformNavbar(props: any) {
     return (
         <nav className="plat-nav">
             <Link href={'/platform'} className='header_brand'>Oris</Link>
-            <Menu  openDelay={100} closeDelay={400} transitionProps={{transition: 'rotate-right', duration: 150}}>
+            <Menu trigger="hover" openDelay={200} closeDelay={200} transitionProps={{transition: 'fade', duration: 150}}>
                 <MenuTarget>
                     <a className='profile-picture-central'><Image className='profile-picture' src={props.profileInfo['profile_pic']} alt='Profile Picture' width={40} height={40} /></a>
                 </MenuTarget>

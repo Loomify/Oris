@@ -74,3 +74,19 @@ body {
     width: 100px;
     height: 100px;
 }
+
+
+.welcomes {
+    & {
+        display: flex;
+        flex-direction: column;
+        height: 15vh;
+        justify-content: center;
+        margin-left: 2em;
+    }
+}
+
+.body {
+    display: flex;
+    flex: 1;
+}
