@@ -4,13 +4,14 @@ import { redirect } from "next/navigation"
 import * as jwt from "jose"
 import * as crypto from "crypto"
 import { db } from "@/db/db"
-import { account, accountInformation } from "@/db/schema"
+import { account } from "@/db/schema"
 import { eq } from "drizzle-orm"
 import { Button, Input, TextInput } from '@mantine/core'
 import Link from 'next/link'
 import PreviewImage from '@/components/platform/PreviewImage'
 import multer from 'multer'
 import Image from 'next/image'
+import { PlatformNavbar } from '@/components/platform/PlatformNavbar'
 
 export default async function Platform(args: any) {
     // Save profile info
@@ -45,8 +46,7 @@ export default async function Platform(args: any) {
     let account_info = await db.select().from(account).where(eq(account.email, email))
     // grab profile info
     // @ts-ignore
-    let profile_info = await db.select().from(accountInformation).where(eq(accountInformation.acc_id, account_info[0]['id']))
-    if (profile_info.length == 0) {
+    if (account_info[0].organization == null && account_info[0].image_url == null && account_info[0].first_name == null && account_info[0].last_name == null && account_info[0].user_role == null) {
         if (args['searchParams']['welcome'] == undefined) {
             return (
                 <>
@@ -96,14 +96,15 @@ export default async function Platform(args: any) {
     }
     return (
         <>
-            <h1>Welcome, {profile_info[0]['first_name']}!</h1>
+            <PlatformNavbar />
+            <h1>Welcome, {account_info[0]['first_name']}!</h1>
             <p>Your token is: {token['value']}</p>
             {/* @ts-ignore */}
             <p>Your email is: {email}</p>
-            <p>Your organization is {profile_info[0]['organization']}</p>
-            <p>Your user role is {profile_info[0]['user_role']}</p>
-            <p>Your full name is {`${profile_info[0]['first_name']} ${profile_info[0]['last_name']}`}</p>
-            <Image src={profile_info[0]['image_url'] || '/default_pfp.png'} alt='profile picture' className='profile_pic' width={200} height={200} />
+            <p>Your organization is {account_info[0]['organization']}</p>
+            <p>Your user role is {account_info[0]['user_role']}</p>
+            <p>Your full name is {`${account_info[0]['first_name']} ${account_info[0]['last_name']}`}</p>
+            <Image src={account_info[0]['image_url'] || '/default_pfp.png'} alt='profile picture' className='profile_pic' width={200} height={200} />
             <Button component={Link} href="/platform/logout">Logout</Button>
         </>
     )

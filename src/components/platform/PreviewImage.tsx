@@ -30,8 +30,8 @@ export default function PreviewImage() {
                 })
             }).then((res) => {
                 res.json().then((d) => {
-                    if (d['status'] == 'error') {
-                        router.refresh()
+                    if (d['HORIZON_STATUS'] == 'CREATED_PROFILE') {
+                        router.push('/platform')
                     }
                 })
             })

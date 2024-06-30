@@ -11,8 +11,4 @@ export default function AccountLogout() {
         }
     })
     })
-    return (
-        <>
-        </>
-    )
 }
