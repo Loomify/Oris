@@ -1,0 +1,45 @@
+.plat-nav {
+    & {
+        background-color: rgb(36, 36, 36);
+        display: flex;
+        flex-direction: row;
+        height: 5vh;
+        align-items: center;
+        padding: 10px;
+        justify-content: space-between;
+    }
+    .header_brand {
+        color: white;
+        margin-left: 1.5em;
+        font-size: 1.5em;
+        font-weight: 900;
+    }
+}
+
+.dropdown {
+    & {
+        min-width: 200px;
+    }
+    * {
+        color: black;
+    }
+}
+
+.profile-picture {
+    & {
+        border-radius: 100%;
+        margin: auto;
+        margin-top: 5px;
+        margin-right: 1em;
+    }
+    &:hover {
+        cursor: pointer;
+    }
+
+}
+
+.profile-picture-central {
+    &:hover {
+        cursor: pointer;
+    }
+}

@@ -96,7 +96,13 @@ export default async function Platform(args: any) {
     }
     return (
         <>
-            <PlatformNavbar />
+            <PlatformNavbar profileInfo={{
+                'profile_pic': account_info[0]['image_url'] || '/default_pfp.png',
+                'first_name': account_info[0]['first_name'],
+                'last_name': account_info[0]['last_name'],
+                'organization': account_info[0]['organization'],
+                'user_role': account_info[0]['user_role']
+            }} />
             <h1>Welcome, {account_info[0]['first_name']}!</h1>
             <p>Your token is: {token['value']}</p>
             {/* @ts-ignore */}
