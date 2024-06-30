@@ -10,6 +10,7 @@ import { Button, Input, TextInput } from '@mantine/core'
 import Link from 'next/link'
 import PreviewImage from '@/components/platform/PreviewImage'
 import multer from 'multer'
+import Image from 'next/image'
 
 export default async function Platform(args: any) {
     // Save profile info
@@ -43,7 +44,8 @@ export default async function Platform(args: any) {
     // @ts-ignore
     let account_info = await db.select().from(account).where(eq(account.email, email))
     // grab profile info
-    let profile_info = await db.select().from(accountInformation).where(eq(accountInformation.account_id, account_info[0]['id']))
+    // @ts-ignore
+    let profile_info = await db.select().from(accountInformation).where(eq(accountInformation.acc_id, account_info[0]['id']))
     if (profile_info.length == 0) {
         if (args['searchParams']['welcome'] == undefined) {
             return (
@@ -92,13 +94,16 @@ export default async function Platform(args: any) {
             }
         }
     }
-    console.log(profile_info)
     return (
         <>
-            <h1>Welcome to oris!</h1>
+            <h1>Welcome, {profile_info[0]['first_name']}!</h1>
             <p>Your token is: {token['value']}</p>
             {/* @ts-ignore */}
             <p>Your email is: {email}</p>
+            <p>Your organization is {profile_info[0]['organization']}</p>
+            <p>Your user role is {profile_info[0]['user_role']}</p>
+            <p>Your full name is {`${profile_info[0]['first_name']} ${profile_info[0]['last_name']}`}</p>
+            <Image src={profile_info[0]['image_url'] || '/default_pfp.png'} alt='profile picture' className='profile_pic' width={200} height={200} />
             <Button component={Link} href="/platform/logout">Logout</Button>
         </>
     )

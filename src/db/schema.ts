@@ -13,7 +13,7 @@ export const account = orisSchema.table('account', {
 
 export const accountInformation = orisSchema.table('accountinformation', {
     id: serial('id').primaryKey(),
-    account_id: serial('id'),
+    acc_id: text('acc_id'),
     image_url: text('image_url'),
     first_name: text('first_name'),
     last_name: text('last_name'),

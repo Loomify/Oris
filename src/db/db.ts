@@ -14,7 +14,7 @@ export const client = new Client({
     password: process.env.db_password,
     // @ts-ignore
     database: process.env.db_name,
-    ssl: true
+    ssl: process.env.db_ssl_enabled?.toLowerCase() == 'true' ? true : false,
 })
 
 client.connect()

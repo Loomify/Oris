@@ -10,7 +10,7 @@ export default {
     user: process.env.db_username,
     password: process.env.db_password,
     database: process.env.db_name,
-    ssl: 'require',
+    ssl: process.env.db_ssl_migration_status,
   }
 // @ts-ignore
 } satisfies Config;

@@ -1,9 +1,11 @@
 'use client';
 
 import { Button, Input, TextInput } from "@mantine/core";
+import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 
 export default function PreviewImage() {
+    let router = useRouter();
     const [preview, setPreview] = useState(null);
     function fileInputReferencer(event: any) {
         const file = event.target.files[0];
@@ -20,11 +22,17 @@ export default function PreviewImage() {
         const reader = new FileReader();
         reader.onloadend = () => {
             image_contents = reader.result;
-            fetch('/api/platform/profile', {
+            fetch('/api/v1/platform/profile', {
                 'method': 'POST',
                 'body': JSON.stringify({
                     'profile_picture': image_contents,
                     'organization': organization
+                })
+            }).then((res) => {
+                res.json().then((d) => {
+                    if (d['status'] == 'error') {
+                        router.refresh()
+                    }
                 })
             })
         }
