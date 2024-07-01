@@ -1,4 +1,4 @@
-import '@/css/platform/platform.css'
+import '@/css/platform/settings.css'
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 import * as jwt from "jose"
@@ -13,6 +13,28 @@ import { Button, TextInput } from '@mantine/core'
 import { SettingsAccountDelete } from '@/components/platform/settings/SettingsAccountDelete'
 
 export default async function PlatformSettings(args: any) {
+    async function changeFirstLastName(e: FormData) {
+        "use server"
+        let first_name = await e.get('first_name')
+        let last_name = await e.get('last_name')
+        let token = cookies().get('horizon_token')
+        if (token == undefined) {
+            return redirect('/platform/account')
+        }
+        // Grabs the JWT
+        // @ts-ignore
+        let token_info = await jwt.jwtVerify(token['value'], crypto.createSecretKey(process.env.JWT_Secret, 'utf-8'))
+        // Since the payload has an email, the email is our identifier.
+        let email = token_info['payload']['email']
+        // Now we have account information.
+        // @ts-ignore
+        let account_info = await db.select().from(account).where(eq(account.email, email))
+        if (account_info.length != 0) {
+            // @ts-ignore
+            await db.update(account).set({'first_name': first_name, 'last_name': last_name}).where(eq(account.email, email))
+            return redirect('/platform/settings')
+        }
+    }
     // Save profile info
     // Get cookies
     let token = cookies().get('horizon_token')
@@ -47,15 +69,30 @@ export default async function PlatformSettings(args: any) {
                 <PlatformSidebar />
                 <main className='platform_content'>
                     <h1>Settings</h1>
-                    <p>Update your account settings.</p>
-                    <form>
-                        {/* @ts-ignore */}
-                        <TextInput label='First Name' name='first_name' placeholder={account_info[0]['first_name']} required />
-                        {/* @ts-ignore */}
-                        <TextInput label='Last Name' name='last_name' placeholder={account_info[0]['last_name']} required />
-                        <Button type='submit'>Save</Button>
-                    </form>
-                    <SettingsAccountDelete />
+                    <p>Update your account settings or adjust some things.</p>
+                    <div className='profile_settings'>
+                        <h2>Profile</h2>
+                        <form action={changeFirstLastName} className='change_section'>
+                            <div className='change_fullname'>
+                                {/* @ts-ignore */}
+                                <TextInput label='First Name:' name='first_name' defaultValue={account_info[0]['first_name']} placeholder='Dylan J.' required />
+                                {/* @ts-ignore */}
+                                <TextInput label='Last Name:' name='last_name' defaultValue={account_info[0]['last_name']} placeholder='Freeman' required />
+                            </div>
+                            <div className='change_email'>
+                                {/* @ts-ignore */}
+                                <TextInput label='Email:' name='email' defaultValue={account_info[0]['email']} placeholder='df@avnce.org' required/>
+                            </div>             
+                            <div className='organization'>
+                                {/* @ts-ignore */}
+                                <TextInput label='Organization or current affiliation:' name='organization' defaultValue={account_info[0]['organization']} placeholder='Loom' required/>
+                            </div>            
+                            <div className='links'>
+                                <SettingsAccountDelete />
+                                <Button type='submit' formAction={changeFirstLastName}>Save</Button>
+                            </div>
+                        </form>
+                    </div>
                 </main>
             </div>
         </div>

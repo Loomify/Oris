@@ -1,9 +1,11 @@
 'use client'
-
-import { Button } from "@mantine/core"
+import '@/css/platform/settings.css'
+import { Button, Modal } from "@mantine/core"
+import { useDisclosure } from "@mantine/hooks";
 import { useRouter } from "next/navigation"
 
 export function SettingsAccountDelete() {
+    const [opened, { open, close }] = useDisclosure(false);
     // For redirects
     let router = useRouter()
 
@@ -19,6 +21,14 @@ export function SettingsAccountDelete() {
     }
 
     return (
-            <Button onClick={deleteAccount} variant='filled' type='submit' color='rgba(189, 0, 0, 1)'>Delete Account</Button>
+        <>
+            <Modal opened={opened} onClose={close} title="Account Deletion"  centered className='deletionModal' style={{backgroundColor: 'black'}}>
+                <h2 className='confirmation_head'>Are you sure you would like to delete your account?</h2>
+                <p>This action is irreversible and will delete all of your data, including what you have uploaded to the platform. </p>
+                <br />
+                <Button onClick={deleteAccount} className='submit_delete' variant='filled' type='submit' color='rgba(189, 0, 0, 1)'>Delete Account</Button>
+            </Modal>
+            <Button onClick={open} className='submit_delete' variant='filled' type='submit' color='rgba(189, 0, 0, 1)'>Delete Account</Button>
+        </>
     )
 }
