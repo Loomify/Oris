@@ -16,7 +16,7 @@ import { SettingsAccountDelete } from '@/components/platform/settings/SettingsAc
 export default async function PlatformSettings(args: any) {
     async function changeAccountInformation(e: FormData) {
         "use server"
-        // Gets all profile information
+        // Gets all email information
         let email = await e.get('email')
         let confirm_email = await e.get('confirm_email')
         let confirm_password = await e.get('confirm_password')
@@ -113,6 +113,12 @@ export default async function PlatformSettings(args: any) {
                 <main className='platform_content'>
                     <h1>Settings</h1>
                     <p>Update your account settings or adjust some things.</p>
+                    <div className='profile_settings_lead'>
+                        <h2>Actions:</h2>
+                        <Button component={Link} href={'/platform/settings/security'}>
+                            Security
+                        </Button>
+                    </div>
                     <div className='profile_settings'>
                         <h2>Email Information</h2>
                         <form action={changeAccountInformation} className='change_section'>

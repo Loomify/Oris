@@ -10,7 +10,6 @@ import { cookies } from "next/headers";
 
 // Necessary for being able to perform a POST request and then getting data
 export async function POST(req: NextRequest) {
-   
     // Obtain the data with username and password
     let data = await req.json()
     // Got the credentials
