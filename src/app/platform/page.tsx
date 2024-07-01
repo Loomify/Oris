@@ -49,7 +49,7 @@ export default async function Platform(args: any) {
     // grab profile info
     // @ts-ignore
     if (account_info[0].organization == null && account_info[0].image_url == null && account_info[0].first_name == null && account_info[0].last_name == null && account_info[0].user_role == null) {
-        if (args['searchParams']['welcome'] == undefined) {
+        if (args['searchParams']['welcome'] == undefined || args['searchParams']['stage'] == undefined || args['searchParams']['welcome'] == true) {
             return (
                 <>
                     <div className='welcome'>

@@ -115,6 +115,7 @@ body {
 
 .profile_settings {
     border-radius: 10px;
+    margin: 1em;
     padding: 1em;
     border: 3px solid rgb(34, 34, 34);
     display: flex;
@@ -150,4 +151,33 @@ body {
     color: white;
     font-family: 'DMSans';
     font-size: 1.5em;
+}
+
+.account_settings {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    justify-content: center;
+    border: 3px solid rgb(34, 34, 34);
+    border-radius: 10px;
+    margin: 1em;
+}
+
+.account_settings_section {
+    border: 3px solid rgb(34, 34, 34);
+    border-radius: 10px;
+    margin: 1em;
+    width: 120px;
+    display: flex;
+    height: 70px;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.change_email {
+    display: flex;
+    gap: 1em;
+    align-items: center;
+    justify-content: center;
 }
