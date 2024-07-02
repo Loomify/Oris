@@ -10,13 +10,9 @@ import { PlatformNavbar } from '@/components/platform/PlatformNavbar'
 import { PlatformSidebar } from '@/components/platform/PlatformSidebar'
 import { Button, Checkbox, FileInput, TextInput } from '@mantine/core'
 import { UploadPaper } from '@/components/platform/papers/UploadPaper'
+import { uploadFiles } from '@/lib/uploadFiles'
 
 export default async function Profile(args: any) {
-    // Function for uploading files
-    async function uploadFiles(event: any) {
-        "use server"
-        console.log(event)        
-    }
     // Get cookies
     let token = cookies().get('horizon_token')
     if (token == undefined) {

@@ -17,7 +17,7 @@ export default function PreviewImage() {
         fread.readAsDataURL(file);
     }
     async function saveSubmit(info: any) {
-        let [profile_picture, organization] = [info.target['profile_picture'].files[0], info.target['organization'].value]
+        let [profile_picture, organization] = [info.get('profile_picture'), info.get('organization')];
         let image_contents = null;
         const reader = new FileReader();
         reader.onloadend = () => {
@@ -32,6 +32,8 @@ export default function PreviewImage() {
                 res.json().then((d) => {
                     if (d['HORIZON_STATUS'] == 'CREATED_PROFILE') {
                         router.push('/platform')
+                    } else {
+                        router.push('/platform/')
                     }
                 })
             })
@@ -39,7 +41,7 @@ export default function PreviewImage() {
         reader.readAsDataURL(profile_picture as Blob);
     }
     return (
-        <form method='POST' onSubmit={saveSubmit}>
+        <form action={saveSubmit}>
             <div className="image_setup">
                 <Input id="file_input" type='file' name="profile_picture" onChange={fileInputReferencer} accept="image/*" required />
                 {/* @ts-ignore */}

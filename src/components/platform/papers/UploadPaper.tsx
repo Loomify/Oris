@@ -1,6 +1,7 @@
 'use client'
 import '@/css/components/platform/papers/UploadPaper.css'
 import { Upload } from 'react-feather'
+
 export function UploadPaper() {
     function fileUploadChange(event: any) {
         let file_text = document.getElementById('file_text') as HTMLElement

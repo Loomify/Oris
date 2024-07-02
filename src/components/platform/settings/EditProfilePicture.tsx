@@ -1,6 +1,7 @@
 'use client'
 import '@/css/components/platform/settings/EditProfilePicture.css'
 import { Button } from '@mantine/core'
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Upload } from 'react-feather';
 export function EditProfilePicture(args: any) {
@@ -15,7 +16,7 @@ export function EditProfilePicture(args: any) {
         fread.readAsDataURL(file);
     }
     function updateProfilePicture(info: any) {
-        let profile_picture = info.target['profile_picture'].files[0]
+        let profile_picture = info.get('profile_picture')
         let image_contents = null;
         const reader = new FileReader();
         reader.onloadend = () => {
@@ -26,7 +27,7 @@ export function EditProfilePicture(args: any) {
                     'profile_picture': image_contents,
                 })}).then((r) => {r.json().then((data) => {
                     if (data['HORIZON_STATUS'] == 'UPDATED_PROFILE_PICTURE') {
-                        window.location.reload();
+                        window.location.reload()
                     }
                 })})
         }
@@ -35,8 +36,8 @@ export function EditProfilePicture(args: any) {
     return (
         <div className='profile_picture_section'>
             <img className='profile_preview' src={profile_picture_preview || (args.profile_picture || "/default_pfp.png")} />
-            <form onSubmit={updateProfilePicture} method='POST'>
-                <input type="file" name="profile_picture" onChange={capturePreview} accept="image/*" />
+            <form action={updateProfilePicture}>
+                <input type="file" name="profile_picture" onChange={capturePreview} accept="image/*" required />
                 <Button type="submit" color='green'><Upload /> Upload</Button>
             </form>
         </div>
