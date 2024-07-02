@@ -24,22 +24,19 @@ export async function changeAccountInformation(e: FormData) {
     // @ts-ignore
     let email_verification = await db.select().from(account).where(eq(account.email, email))
     if (email_verification.length != 0) {
-        return
+        return {SIG: 'Email already exists.', HORIZON_STATUS: 'EMAIL_EXISTS'}
     }
     if (account_info.length != 0) {
         // @ts-ignore
         let hashed_password = await crypto.createHash('sha512').update(`${account_info[0].saltA}${confirm_password}${await crypto.createHash('sha256').update(account_info[0]['email']).digest('hex')}${account_info[0].saltB}`).digest('hex');
         if (hashed_password != account_info[0].password) {
-            console.log(process.env.URL)
-            return Response.redirect(`${process.env.URL}/platform/settings/?error=password_incorrect`)
+            return  {SIG: 'Password is incorrect.', HORIZON_STATUS: 'PASSWORD_INCORRECT'}
         }
         // @ts-ignore
         let new_password = await crypto.createHash('sha512').update(`${account_info[0].saltA}${confirm_password}${await crypto.createHash('sha256').update(email).digest('hex')}${account_info[0].saltB}`).digest('hex');
         // @ts-ignore
         await db.update(account).set({'email': email, 'password': new_password}).where(eq(account.id, account_info[0].id))
-        console.log('Updated')
-        console.log(process.env.URL)
-        return Response.redirect(`${process.env.URL}/platform/logout`)
+        return  {SIG: 'LOGOUT', HORIZON_STATUS: 'LOGOUT'}
     }
 }
 

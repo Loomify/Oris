@@ -22,11 +22,24 @@ export function SettingsAccountEmailChange() {
         })
     }
 
+    function leadChangeEmail(event: any) {
+        changeAccountInformation(event).then((data) => {
+            // @ts-ignore
+            if (data['HORIZON_STATUS'] == 'LOGOUT') {
+                router.push('/platform/logout')
+            } else {
+                // @ts-ignore
+                (document.getElementById('email_change_message_status') as HTMLElement).innerHTML = data['SIG']
+            }
+        })
+    }
+
     return (
         <>
 
             <Modal opened={opened} onClose={close} title="Email Information"  centered className='changePasswordModal' style={{backgroundColor: 'black'}}>
-                        <form action={changeAccountInformation} className='change_section'>
+                        <form action={leadChangeEmail} className='change_section'>
+                            <p id='email_change_message_status'></p>
                             <div className='change_email'>
                                 {/* @ts-ignore */}
                                 <TextInput label='Email:' name='email' required/>
@@ -35,7 +48,7 @@ export function SettingsAccountEmailChange() {
                             </div>
                             {/* @ts-ignore */}
                             <PasswordInput label='Confirm Password:' type='password' name='confirm_password' placeholder='Password' required/>
-                            <Button type='submit' formAction={changeAccountInformation}>Change Information</Button>
+                            <Button type='submit' formAction={leadChangeEmail}>Change Information</Button>
                         </form>
             </Modal>
             <a onClick={open} className=' change_password' type='submit'><Mail /> Change Email</a>
