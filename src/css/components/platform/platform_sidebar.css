@@ -24,3 +24,16 @@
         cursor: pointer;
     }
 }
+
+@media screen and (max-width: 768px) {
+    .sidebar {
+        /* move bottom */
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        min-height: 10vh;
+    }
+    
+}

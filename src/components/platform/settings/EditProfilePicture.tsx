@@ -14,8 +14,8 @@ export function EditProfilePicture(args: any) {
         }
         fread.readAsDataURL(file);
     }
-    function updateProfilePicture(info: FormData) {
-        let [profile_picture] = [info.get('profile_picture')];
+    function updateProfilePicture(info: any) {
+        let profile_picture = info.target['profile_picture'].files[0]
         let image_contents = null;
         const reader = new FileReader();
         reader.onloadend = () => {
@@ -35,7 +35,7 @@ export function EditProfilePicture(args: any) {
     return (
         <div className='profile_picture_section'>
             <img className='profile_preview' src={profile_picture_preview || (args.profile_picture || "/default_pfp.png")} />
-            <form action={updateProfilePicture}>
+            <form onSubmit={updateProfilePicture} method='POST'>
                 <input type="file" name="profile_picture" onChange={capturePreview} accept="image/*" />
                 <Button type="submit" color='green'><Upload /> Upload</Button>
             </form>

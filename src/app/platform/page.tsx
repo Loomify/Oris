@@ -112,10 +112,10 @@ export default async function Platform(args: any) {
                     <div className='quick_actions'>
                         <h2>Quick Actions</h2>                   
                         <div className='platform_actions'>
-                            <a className='platform_action'>
+                            <Link href={'/platform/papers/add'} className='platform_action'>
                                 <Plus />
                                 Add Paper
-                            </a>
+                            </Link>
                             <Link href={'/platform/settings'} className='platform_action'>
                                 <Settings />
                                 Settings

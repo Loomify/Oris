@@ -16,8 +16,8 @@ export default function PreviewImage() {
         }
         fread.readAsDataURL(file);
     }
-    async function saveSubmit(info: FormData) {
-        let [profile_picture, organization] = [info.get('profile_picture'), info.get('organization')]
+    async function saveSubmit(info: any) {
+        let [profile_picture, organization] = [info.target['profile_picture'].files[0], info.target['organization'].value]
         let image_contents = null;
         const reader = new FileReader();
         reader.onloadend = () => {
@@ -39,7 +39,7 @@ export default function PreviewImage() {
         reader.readAsDataURL(profile_picture as Blob);
     }
     return (
-        <form method='POST' action={saveSubmit}>
+        <form method='POST' onSubmit={saveSubmit}>
             <div className="image_setup">
                 <Input id="file_input" type='file' name="profile_picture" onChange={fileInputReferencer} accept="image/*" required />
                 {/* @ts-ignore */}

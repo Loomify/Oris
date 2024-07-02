@@ -1,4 +1,4 @@
-import '@/css/platform/profile.css'
+import '@/css/platform/papers/add.css'
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 import * as jwt from "jose"
@@ -6,13 +6,8 @@ import * as crypto from "crypto"
 import { db } from "@/db/db"
 import { account } from "@/db/schema"
 import { eq } from "drizzle-orm"
-import Link from 'next/link'
 import { PlatformNavbar } from '@/components/platform/PlatformNavbar'
 import { PlatformSidebar } from '@/components/platform/PlatformSidebar'
-import { Button } from '@mantine/core'
-import Image from 'next/image'
-import { Briefcase, Edit2 } from 'react-feather'
-
 
 export default async function Profile(args: any) {
     // Save profile info
@@ -36,5 +31,23 @@ export default async function Profile(args: any) {
             redirect('/platform/?welcome=true')
         }
     }
-    return redirect('/platform/profile/' + account_info[0].id)
+
+    return (
+        <div className="container">
+            <PlatformNavbar profileInfo={{
+                'profile_pic': account_info[0]['image_url'] || '/default_pfp.png',
+                'first_name': account_info[0]['first_name'],
+                'last_name': account_info[0]['last_name'],
+                'organization': account_info[0]['organization'],
+                'user_role': account_info[0]['user_role']
+            }} />
+            <div className="platform_body">
+                <PlatformSidebar />
+                <main className='platform_content_add_paper'>
+                    <h1>Upload a Paper</h1>
+                    
+                </main>
+            </div>
+        </div>
+    )
 }
