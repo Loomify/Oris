@@ -8,9 +8,15 @@ import { account } from "@/db/schema"
 import { eq } from "drizzle-orm"
 import { PlatformNavbar } from '@/components/platform/PlatformNavbar'
 import { PlatformSidebar } from '@/components/platform/PlatformSidebar'
+import { Button, Checkbox, FileInput, TextInput } from '@mantine/core'
+import { UploadPaper } from '@/components/platform/papers/UploadPaper'
 
 export default async function Profile(args: any) {
-    // Save profile info
+    // Function for uploading files
+    async function uploadFiles(event: any) {
+        "use server"
+        console.log(event)        
+    }
     // Get cookies
     let token = cookies().get('horizon_token')
     if (token == undefined) {
@@ -44,8 +50,31 @@ export default async function Profile(args: any) {
             <div className="platform_body">
                 <PlatformSidebar />
                 <main className='platform_content_add_paper'>
-                    <h1>Upload a Paper</h1>
-                    
+                    <div className='page_headers'>
+                        <h1>Upload a Paper</h1>
+                        <p>Welcome to the upload wizard!</p>
+                    </div>
+                    {/* @ts-ignore */}
+                    <form action={uploadFiles} method='post'>
+                        <TextInput label='Title' name='title' placeholder='Title' required />
+                        <TextInput label='Authors' name='authors' placeholder='Authors' required />
+                        <TextInput label='Field' name='paper_field' placeholder='Field' required />
+                        <UploadPaper />
+                        <div className='file_settings'>
+                            <div className='row'>
+                                <Checkbox name='protect_paper' label='Protect this Paper' />
+                                <Checkbox name="preprint_paper" label='This paper is a preprint' />
+                                <Checkbox name='journal_status' label='This paper is for a journal' />
+                            </div>
+                            <div className='row'>
+                                <Checkbox name='open_access' label='This paper is open access' />
+                                <Checkbox name='peer_reviewed' label='This paper needs to be peer reviewed' />
+                            </div>
+                        </div>
+                        <Checkbox name='academic_honesty' label="By checking this box, I agree that the work is my intellectual property and isn't plagarized." required />
+                        <Checkbox name='terms_of_service' label="By checking this box, I agree to provide a license to Oris to be able to distribute this paper." required />
+                        <Button type='submit'>Finalize Upload</Button>
+                    </form>
                 </main>
             </div>
         </div>
