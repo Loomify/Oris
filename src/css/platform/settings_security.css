@@ -118,3 +118,9 @@ body {
         cursor: pointer;
     }
 }
+
+.security_actions {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}

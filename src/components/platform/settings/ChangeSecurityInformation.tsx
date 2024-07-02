@@ -4,6 +4,8 @@ import { Button, Modal, PasswordInput, Text } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks";
 import { useRouter } from "next/navigation"
 import { Key } from 'react-feather';
+import { SettingsAccountDelete } from './SettingsAccountDelete';
+import { SettingsAccountEmailChange } from './SettingsAccountEmailChange';
 
 export function ChangeSecurityInformation() {
     const [opened, { open, close }] = useDisclosure(false);
@@ -48,7 +50,12 @@ export function ChangeSecurityInformation() {
                     <Button className='submit_password_change' variant='filled' type='submit' color='rgba(31, 146, 204, 0.8)'>Change Password</Button>
                 </form>
             </Modal>
-            <a onClick={open} className='change_password' type='submit' color='rgba(31, 146, 204, 0.8)'><Key /> Change Password</a>
+
+            <div className='security_actions'>
+                <a onClick={open} className='change_password' type='submit' color='rgba(31, 146, 204, 0.8)'><Key /> Change Password</a>
+                <SettingsAccountEmailChange />
+                <SettingsAccountDelete />
+            </div>
         </>
     )
 }

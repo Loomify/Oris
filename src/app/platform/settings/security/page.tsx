@@ -43,7 +43,7 @@ export default async function PlatformSettingsSecurity(args: any) {
             <div className="platform_body">
                 <PlatformSidebar />
                 <main className='platform_content'>
-                    <h1>Security</h1>
+                    <h1>Actions</h1>
                     <ChangeSecurityInformation />
                 </main>
             </div>

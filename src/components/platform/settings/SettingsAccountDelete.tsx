@@ -3,6 +3,7 @@ import '@/css/platform/settings.css'
 import { Button, Modal } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks";
 import { useRouter } from "next/navigation"
+import { Trash } from 'react-feather';
 
 export function SettingsAccountDelete() {
     const [opened, { open, close }] = useDisclosure(false);
@@ -28,7 +29,7 @@ export function SettingsAccountDelete() {
                 <br />
                 <Button onClick={deleteAccount} className='submit_delete' variant='filled' type='submit' color='rgba(189, 0, 0, 1)'>Delete Account</Button>
             </Modal>
-            <Button onClick={open} className='submit_delete' variant='filled' type='submit' color='rgba(189, 0, 0, 1)'>Delete Account</Button>
+            <a onClick={open} className=' change_password' type='submit'><Trash /> Delete Account</a>
         </>
     )
 }

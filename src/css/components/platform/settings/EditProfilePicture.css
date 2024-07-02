@@ -1,0 +1,20 @@
+.profile_preview {
+    border-radius: 100%;
+    width: 100px;
+    height: 100px;
+}
+
+.profile_picture_section {
+    & {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1em;
+        margin: 1em 0;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+    }
+}
