@@ -67,7 +67,7 @@ export default async function AddPapers(args: any) {
                         <TextInput label='Title' name='title' placeholder='Title' required />
                         <TextInput label='Authors' name='authors' placeholder='Authors' required />
                         <TextInput label='Field' name='paper_field' placeholder='Field' required />
-                        <UploadPaper />
+                        <UploadPaper accept=".pdf" />
                         <div className='file_settings'>
                             <div className='row'>
                                 <Checkbox name='protect_paper' label='Protect this Paper' />

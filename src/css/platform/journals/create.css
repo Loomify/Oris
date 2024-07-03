@@ -1,0 +1,25 @@
+body {
+    background-color: rgb(24, 24, 24);
+}
+
+.platform_body {
+    display: flex;
+    flex: 1;
+}
+
+.platform_content_create_journal {
+    display: flex;
+    flex: 1;
+    flex-direction: row !important;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5em;
+    font-family: 'DMSans';
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    min-width: 300px;
+}

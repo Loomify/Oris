@@ -43,5 +43,6 @@ export const journal = orisSchema.table('journal', {
     name: text('name'),
     description: text('description'),
     field: text('field'),
+    image_url: text('image_url'),
     owner_id: serial('owner_id'),
 })

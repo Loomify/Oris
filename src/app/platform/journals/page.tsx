@@ -33,6 +33,7 @@ export default async function Journals(args: any) {
         }
     }
     let journal_information = await db.select().from(journal)
+    console.log(journal_information)
     return (
         <div className="container">
             <PlatformNavbar profileInfo={{
@@ -48,10 +49,11 @@ export default async function Journals(args: any) {
                     {journal_information.length >0 ? (
                         <>
                             <div className='journals'>
-
-                            {/* <Link href={''} className='journal_card' style={{backgroundImage: `url("URL_HERE")`, backgroundSize: 'cover'}}>
-                                <h1></h1>
-                            </Link> */}
+                                {journal_information.map((journal_entry: any) => (
+                                    <Link href={''} key={journal_entry} className='journal_card' style={{backgroundImage: `url("${journal_entry.image_url}")`, backgroundSize: 'cover'}}>
+                                        <h1></h1>
+                                    </Link>
+                                ))}
                             </div>
                         </>
                         ) : (

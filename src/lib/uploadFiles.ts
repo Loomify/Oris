@@ -65,7 +65,7 @@ export async function uploadFiles(form_information: FormData) {
             return {STATUS_MESSAGE: 'File uploaded successfully', HORIZON_STATUS: 'SUCCESS', FILE_URL: `/papers/${file.size}${file.name}`}    
         } else if (process.env.file_storage_method?.toLowerCase() == 'vercel') {
             // @ts-ignore
-            let information = await vercelStorageAdapter(file, file.size, email)
+            let information = await vercelStorageAdapter(file, file.size)
             await db.insert(paper).values({
                 // @ts-ignore
                 title: title,
