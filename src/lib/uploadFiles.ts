@@ -66,7 +66,20 @@ export async function uploadFiles(form_information: FormData) {
         } else if (process.env.file_storage_method?.toLowerCase() == 'vercel') {
             // @ts-ignore
             let information = await vercelStorageAdapter(file, file.size, email)
-            await db.update(paper).set({file_url: information.url}).where(and(eq(paper.file_name, file.name), eq(paper.owner_id, account_info[0].id)))
+            await db.insert(paper).values({
+                // @ts-ignore
+                title: title,
+                authors: authors,
+                paper_field: paper_field,
+                // @ts-ignore
+                file_name: file.name,
+                file_url: information.url,
+                protect_paper: paper_protection,
+                peer_review: paper_peer_review,
+                academic_honesty: academic_honesty,
+                terms_of_service: terms_of_service,
+                owner_id: account_info[0].id
+            })
             return {STATUS_MESSAGE: 'File uploaded successfully', HORIZON_STATUS: 'SUCCESS', FILE_URL: information.url}
         }
     } catch (e) {

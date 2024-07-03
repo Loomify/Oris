@@ -30,7 +30,7 @@ export default async function Profile(args: any) {
             redirect('/platform/?welcome=true')
         }
     }
-    let papers = await db.select().from(paper)
+    let papers = await db.select().from(paper).where(eq(paper.owner_id, account_info[0].id))
     return (
         <div className="container">
             <PlatformNavbar profileInfo={{
@@ -47,7 +47,7 @@ export default async function Profile(args: any) {
                         return (
                             <div className="paper" key={paper}>
                                 <h1>{paper.title}</h1>
-                                <a href={`/platform/papers/${paper.file_name}`}>View</a>
+                                <a href={paper.file_url}>View</a>
                             </div>
                         )
                     })}

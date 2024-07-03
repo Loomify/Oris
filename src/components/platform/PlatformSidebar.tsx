@@ -1,12 +1,13 @@
 import '@/css/components/platform/platform_sidebar.css'
+import Link from 'next/link'
 import { Book, BookOpen, Bookmark, Search } from 'react-feather'
 export function PlatformSidebar(args: any) {
     return (
         <div className="sidebar">
-            <a className='sidebar-item'>
+            <Link href={'/platform/papers'} className='sidebar-item'>
                 <Book />
                 Papers
-            </a>
+            </Link>
             <a className='sidebar-item'>
                 <BookOpen />
                 Journals
