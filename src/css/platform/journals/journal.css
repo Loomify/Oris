@@ -89,3 +89,14 @@ body {
     justify-content: center;
     padding: 0.1em;
 }
+
+.editionModal * {
+    color: black;
+}
+
+.editionModalForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding: 1em;
+}

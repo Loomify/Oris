@@ -11,6 +11,7 @@ import { PlatformSidebar } from '@/components/platform/PlatformSidebar'
 import Link from 'next/link'
 import { Button } from '@mantine/core'
 import { Tool } from 'react-feather'
+import { CreateJournalEditionComponent } from '@/components/platform/journals/CreateJournalEditionComponent'
 
 export default async function Journal(args: any) {
     // Get cookies
@@ -67,9 +68,27 @@ export default async function Journal(args: any) {
                         <h1>Journal Editions</h1>
                         {(journal_information[0].owner_id == account_info[0].id) ? (
                             <div className='create_journal_edition'>
-                                <Button>Create Edition</Button>
+                                <CreateJournalEditionComponent journal_id={args.params.id} />
                             </div>
                         ) : null}
+                        {editions.length == 0 ? <h2>No editions found, create one!</h2> : (<>
+                            <br />
+                            <div className='editions'>
+                                {editions.map((edition: any) => {
+                                    return (
+                                        <div className='edition' key={edition}>
+                                            <hr />
+                                            <h2>{edition.edition_name}</h2>
+                                            <p>{edition.edition_description}</p>
+                                            <h4>Released on {edition.edition_date} {edition.paper_ids}</h4>
+                                            {edition.paper_ids.split(',').map((paper_id: any) => {
+                                                
+                                            })}
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        </>)}
                     </div>
                 </main>
             </div>

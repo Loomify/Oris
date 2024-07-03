@@ -10,7 +10,6 @@ import Link from 'next/link'
 import { PlatformNavbar } from '@/components/platform/PlatformNavbar'
 import { PlatformSidebar } from '@/components/platform/PlatformSidebar'
 import { Button, TextInput } from '@mantine/core'
-import { SettingsAccountDelete } from '@/components/platform/settings/SettingsAccountDelete'
 import { EditProfilePicture } from '@/components/platform/settings/EditProfilePicture'
 
 
@@ -90,7 +89,7 @@ export default async function PlatformSettings(args: any) {
                             <div className='organization'>
                                 {/* @ts-ignore */}
                                 <TextInput label='Organization or current affiliation:' name='organization' defaultValue={account_info[0]['organization']} placeholder='Loom' required/>
-                            </div>            
+                            </div>
                             <div className='links'>
                                 <Button type='submit' formAction={changeProfileInformation}>Save</Button>
                             </div>
