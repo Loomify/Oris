@@ -16,6 +16,7 @@
     "@types/bcrypt": "^5.0.2",
     "@types/multer": "^1.4.11",
     "@uploadthing/react": "^6.7.2",
+    "@vercel/blob": "^0.23.4",
     "bcrypt": "^5.1.1",
     "drizzle-orm": "^0.31.2",
     "embla-carousel-react": "^8.1.5",
@@ -29,7 +30,8 @@
     "prisma": "^5.16.1",
     "react": "^18",
     "react-dom": "^18",
-    "react-feather": "^2.0.10"
+    "react-feather": "^2.0.10",
+    "vercel": "^34.2.8"
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -42,6 +44,10 @@
     "typescript": "^5"
   },
   "trustedDependencies": [
-    "core-js"
+    "@prisma/engines",
+    "bcrypt",
+    "core-js",
+    "esbuild",
+    "prisma"
   ]
 }
