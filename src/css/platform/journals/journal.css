@@ -1,0 +1,91 @@
+body {
+    background-color: rgb(24, 24, 24);
+}
+
+.platform_body {
+    display: flex;
+    flex: 1;
+}
+
+.platform_content_journals {
+    display: flex;
+    flex: 1;
+    flex-direction: column !important;
+    gap: 2.5em;
+    align-items: center;
+    justify-content: center;
+    padding: 2em;
+    font-family: 'DMSans';
+}
+
+.journal_image {
+    & {
+        width: 300px;
+        height: 400px;
+        border-radius: 10px;
+        background-size: cover;
+        background-position: center;
+        background-color: rosybrown;
+        transition: 500ms;
+    }
+    &:hover {
+        transform: scale(1.01);
+        transition: 500ms;
+    }
+}
+
+.hr {
+    width: 50%;
+    background-color: rgb(255, 255, 255);
+    margin: 0;
+}
+
+.journal_editions {
+    h1 {
+        font-weight: 500;
+        font-size: 1.5em;
+    }
+}
+
+.information {
+    & {
+        display: flex;
+        flex-direction: row;
+        gap: 1em;
+        align-items: center;
+        justify-content: space-between;
+    }
+    a {
+        & {
+            text-decoration: none;
+            color: rgb(255, 255, 255);
+            margin-top: 12px;
+        }
+        .icon {
+            margin-right: 10px;
+            border-radius: 10px;
+            background-color: rgb(37, 37, 37);
+            min-width: 30px;
+            min-height: 30px;
+            padding: 5px;
+            transition: 500ms;
+        }
+        .icon:hover {
+            background-color: rgb(44, 44, 44);
+            transition: 500ms;
+        }
+        .icon:active {
+            background-color: rgb(20, 20, 20);
+            transition: 500ms;
+        }
+    }
+}
+
+.create_journal_edition {
+    display: flex;
+    flex-direction: row;
+    background-color: aqua;
+    align-items: center;
+    justify-content: center;
+    padding: 0.1em;
+}

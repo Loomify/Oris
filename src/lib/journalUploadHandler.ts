@@ -44,7 +44,8 @@ export async function journalUploadHandler(form_information: FormData) {
             // @ts-ignore
             await localStorageAdapter(file, `${account_info[0].id}${file.size}`)
             // @ts-ignore
-            return {STATUS_MESSAGE: 'File uploaded successfully', HORIZON_STATUS: 'SUCCESS', FILE_URL: `/platform/journals`}
+            let db_entry = await db.select().from(journal).where(and(eq(journal.name, journal_name), eq(journal.description, journal_description), eq(journal.field, journal_field), eq(journal.owner_id, account_info[0].id)))
+            return {STATUS_MESSAGE: 'File uploaded successfully', HORIZON_STATUS: 'SUCCESS', FILE_URL: `/platform/journals/${db_entry[0].id}`}
         } else if (process.env.file_storage_method?.toLowerCase() == 'vercel') {
                 // @ts-ignore
                 let information = await vercelStorageAdapter(file, `${account_info[0].id}${file.size}`)
@@ -56,7 +57,9 @@ export async function journalUploadHandler(form_information: FormData) {
                     image_url: information.url,
                     owner_id: account_info[0].id
                 })
-                return {STATUS_MESSAGE: 'File uploaded successfully', HORIZON_STATUS: 'SUCCESS', FILE_URL: `/platform/journals`}            
+                // @ts-ignore
+                let db_entry = await db.select().from(journal).where(and(eq(journal.name, journal_name), eq(journal.description, journal_description), eq(journal.field, journal_field), eq(journal.owner_id, account_info[0].id)))
+                return {STATUS_MESSAGE: 'File uploaded successfully', HORIZON_STATUS: 'SUCCESS', FILE_URL: `/platform/journals/${db_entry[0].id}`}            
         }
     } catch (e) {
         return {STATUS_MESSAGE: 'Internal Server Error', HORIZON_STATUS: 'INTERNAL_SERVER_ERROR'}
