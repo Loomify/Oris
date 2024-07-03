@@ -60,10 +60,6 @@ export default async function Profile(args: any) {
                             <div className='row'>
                                 <Checkbox name='protect_paper' label='Protect this Paper' />
                                 <Checkbox name="preprint_paper" label='This paper is a preprint' />
-                                <Checkbox name='journal_status' label='This paper is for a journal' />
-                            </div>
-                            <div className='row'>
-                                <Checkbox name='open_access' label='This paper is open access' />
                                 <Checkbox name='peer_reviewed' label='This paper needs to be peer reviewed' />
                             </div>
                         </div>
