@@ -38,6 +38,9 @@ export default async function Paper(args: any) {
         }
     }
     let papers = await db.select().from(paper).where(eq(paper.id, args.params.id))
+    if (papers.length == 0) {
+        return redirect('/platform/papers')
+    }
     return (
         <div className="container">
             <PlatformNavbar profileInfo={{

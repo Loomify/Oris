@@ -103,10 +103,14 @@ export default async function Journal(args: any) {
                                             </div>
                                             {edition.paper_ids.split(',').map(async (paper_id: any) => {
                                                 return (
-                                                    <div className='paper' key={paper_id}>
-                                                        <h3>{(await db.select().from(paper).where(eq(paper.id, paper_id)))[0].title}</h3>
-                                                        <p>{(await db.select().from(paper).where(eq(paper.id, paper_id)))[0].authors}</p>
-                                                        <Link href={`/platform/papers/${paper_id}`}><Button>View Paper</Button></Link>
+                                                    <div key={paper_id}>
+                                                    {(await db.select().from(paper).where(eq(paper.id, paper_id))).length == 0 ? null : (
+                                                        <div className='paper'>
+                                                            <h3>{(await db.select().from(paper).where(eq(paper.id, paper_id)))[0].title}</h3>
+                                                            <p>{(await db.select().from(paper).where(eq(paper.id, paper_id)))[0].authors}</p>
+                                                            <Link href={`/platform/papers/${paper_id}`}><Button>View Paper</Button></Link>
+                                                        </div>
+                                                    )}
                                                     </div>
                                                 )
                                             })}
