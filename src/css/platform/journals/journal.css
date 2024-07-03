@@ -7,7 +7,7 @@ body {
     flex: 1;
 }
 
-.platform_content_journals {
+.platform_content_journalr {
     display: flex;
     flex: 1;
     flex-direction: column !important;
@@ -73,6 +73,7 @@ body {
         .icon:hover {
             background-color: rgb(44, 44, 44);
             transition: 500ms;
+            cursor: pointer;
         }
         .icon:active {
             background-color: rgb(20, 20, 20);
@@ -84,7 +85,11 @@ body {
 .create_journal_edition {
     display: flex;
     flex-direction: row;
-    background-color: aqua;
+    border: 2px solid rgb(54, 54, 54);
+    padding: 12px;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     align-items: center;
     justify-content: center;
     padding: 0.1em;
@@ -99,4 +104,28 @@ body {
     flex-direction: column;
     gap: 1em;
     padding: 1em;
+}
+
+.edition {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    padding: 1em;
+    border-radius: 10px;
+    transition: 500ms;
+    min-width: 500px;
+}
+
+.paper {
+    & {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        background-color: rgb(29, 29, 29);
+        border-radius: 10px;
+        margin-top: auto;
+        margin-bottom: auto;
+        gap: 1em;
+        padding: 0.5em;
+    }
 }

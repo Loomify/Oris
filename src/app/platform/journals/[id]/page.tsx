@@ -9,9 +9,10 @@ import { eq } from "drizzle-orm"
 import { PlatformNavbar } from '@/components/platform/PlatformNavbar'
 import { PlatformSidebar } from '@/components/platform/PlatformSidebar'
 import Link from 'next/link'
-import { Button } from '@mantine/core'
+import { Button, Menu, MenuDropdown, MenuTarget } from '@mantine/core'
 import { Tool } from 'react-feather'
 import { CreateJournalEditionComponent } from '@/components/platform/journals/CreateJournalEditionComponent'
+import { JournalEditionMenu } from '@/components/platform/journals/JournalEditionMenu'
 
 export default async function Journal(args: any) {
     // Get cookies
@@ -41,6 +42,9 @@ export default async function Journal(args: any) {
     let owner_id = (await db.select().from(account).where(eq(account.id, journal_information[0].owner_id)))[0]
     // @ts-ignore
     let editions = await db.select().from(journal_edition).where(eq(journal_edition.journal_id, journal_information[0].id))
+    editions.sort((a: any, b: any) => {
+        return new Date(b.edition_date).getTime() - new Date(a.edition_date).getTime()
+    })
     return (
         <div className="container">
             <PlatformNavbar profileInfo={{
@@ -52,12 +56,21 @@ export default async function Journal(args: any) {
             }} />
             <div className="platform_body">
                 <PlatformSidebar />
-                <main className='platform_content_journals'>
+                <main className='platform_content_journalr'>
                     <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignContent: 'center', gap: '1em', marginBottom: '1em'}}> 
                         <div className='journal_image' style={{backgroundImage: `url(${journal_information[0].image_url})`}}>
                         </div>
                         <div className='journal'>
-                            <div className='information'><h1>{journal_information[0].name}</h1>{(journal_information[0].owner_id == account_info[0].id) ? <a><Tool className='icon'/></a> : null}</div>
+                            <div className='information'><h1>{journal_information[0].name}</h1>{(journal_information[0].owner_id == account_info[0].id) ?(<>
+                                <Menu trigger='hover'openDelay={200} closeDelay={200} transitionProps={{transition: 'fade', duration: 150}}>
+                                    <MenuTarget>
+                                        <a><Tool className='icon'/></a>
+                                    </MenuTarget>
+                                    <MenuDropdown className='dropdown'>
+                                        <JournalEditionMenu journalID={args.params.id}/>
+                                    </MenuDropdown>
+                                </Menu>
+                            </>) : null}</div>
                             <h2>Created by {`${owner_id.first_name} ${owner_id.last_name}`}</h2>
                             <p>{journal_information[0].description}</p>
                             <h4>Tags: {journal_information[0].field}</h4>
@@ -78,11 +91,19 @@ export default async function Journal(args: any) {
                                     return (
                                         <div className='edition' key={edition}>
                                             <hr />
-                                            <h2>{edition.edition_name}</h2>
-                                            <p>{edition.edition_description}</p>
-                                            <h4>Released on {edition.edition_date} {edition.paper_ids}</h4>
-                                            {edition.paper_ids.split(',').map((paper_id: any) => {
-                                                
+                                            <div>
+                                                <h2>{edition.edition_name}</h2>
+                                                <p>{edition.edition_description}</p>
+                                                <h4>Released on {edition.edition_date}</h4>
+                                            </div>
+                                            {edition.paper_ids.split(',').map(async (paper_id: any) => {
+                                                return (
+                                                    <div className='paper' key={paper_id}>
+                                                        <h3>{(await db.select().from(paper).where(eq(paper.id, paper_id)))[0].title}</h3>
+                                                        <p>{(await db.select().from(paper).where(eq(paper.id, paper_id)))[0].authors}</p>
+                                                        <Link href={`/platform/papers/${paper_id}`}><Button>View Paper</Button></Link>
+                                                    </div>
+                                                )
                                             })}
                                         </div>
                                     )
