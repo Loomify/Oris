@@ -10,8 +10,29 @@ body {
 .platform_content_paper {
     display: flex;
     flex: 1;
-    flex-direction: column !important;
+    flex-direction: row !important;
     align-items: center;
     justify-content: center;
     gap: 2.5em;
+}
+
+.paper_meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.10em;
+}
+.paper_left {
+    & {        
+        width: 225px;
+        height: 300px;
+        background-size: cover;
+        background-position: center;
+        background-color: rosybrown;
+        border-radius: 10px;
+        transition: 500ms;
+    }
+    &:hover {
+        transform: scale(1.01);
+        transition: 500ms;
+    }
 }

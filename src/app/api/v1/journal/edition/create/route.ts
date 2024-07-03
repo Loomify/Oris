@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import * as jwt from 'jose'
 import * as crypto from 'crypto'
-import { account, journal, journal_edition } from "@/db/schema";
+import { account, journal, journal_edition, paper } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { db } from "@/db/db";
 import { cookies } from "next/headers";
@@ -43,9 +43,20 @@ export async function POST(req: Request) {
                 'HORIZON_STATUS': 'UNAUTHORIZED'
             })
         }
-
+        let papers_list = papers.replace(" ", "").split(',')
+        for (let paper_id of papers_list) {
+            let paper_info = await db.select().from(paper).where(eq(paper.id, parseInt(paper_id)))
+            if (paper_info.length == 0) {
+                return NextResponse.json({
+                    'status': 'Could not find',
+                    'HORIZON_STATUS': 'NOT_FOUND'
+                })
+            }
+            await db.update(paper).set({
+                'journal_id': parseInt(journal_id)
+            }).where(eq(paper.id, parseInt(paper_id)))
+        }
         // Create edition
-        // @ts-ignore
         await db.insert(journal_edition).values({
             'edition_name': name,
             'edition_description': description,

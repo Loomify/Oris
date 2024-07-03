@@ -1,4 +1,4 @@
-import '@/css/platform/papers/add.css'
+import '@/css/platform/papers/papers_page.css'
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 import * as jwt from "jose"
@@ -8,6 +8,8 @@ import { account, paper } from "@/db/schema"
 import { eq } from "drizzle-orm"
 import { PlatformNavbar } from '@/components/platform/PlatformNavbar'
 import { PlatformSidebar } from '@/components/platform/PlatformSidebar'
+import Link from 'next/link'
+import { Button } from '@mantine/core'
 
 export default async function Papers(args: any) {
     // Get cookies
@@ -30,7 +32,10 @@ export default async function Papers(args: any) {
             redirect('/platform/?welcome=true')
         }
     }
-    let papers = await db.select().from(paper).where(eq(paper.owner_id, account_info[0].id))
+    let papers = await db.select().from(paper)
+    papers.sort((a: any, b: any) => {
+        return  b.id - a.id
+    })
     return (
         <div className="container">
             <PlatformNavbar profileInfo={{
@@ -43,14 +48,25 @@ export default async function Papers(args: any) {
             <div className="platform_body">
                 <PlatformSidebar />
                 <main className='platform_content_add_paper'>
-                    {papers.map((paper: any) => {
-                        return (
-                            <div className="paper" key={paper}>
-                                <h1>{paper.title}</h1>
-                                <a href={paper.file_url}>View</a>
-                            </div>
-                        )
-                    })}
+                    {/* {papers[0].authors} */}
+                    {(papers.length == 0) ? <>
+                        <div className='not_found_papers'>
+                            <h1>Not found</h1>
+                            <p>No papers have been uploaded.</p>
+                            <Button color='blue' component={Link} href='/platform/papers/add'>Upload a paper</Button>
+                        </div>
+                    </> : <>
+                        <div className='add_paper'>
+                            {papers.map((paper: any) => {
+                                return (
+                                    <Link href={`/platform/papers/${paper.id}`} className="paper" key={paper}>
+                                        <h1>{paper.title}</h1>
+                                        <p>By {paper.authors}</p>
+                                    </Link>
+                                )
+                            })}
+                        </div>
+                    </>}
                 </main>
             </div>
         </div>

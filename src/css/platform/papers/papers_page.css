@@ -1,0 +1,64 @@
+body {
+    background-color: rgb(24, 24, 24);
+}
+
+.platform_body {
+    display: flex;
+    flex: 1;
+}
+
+.platform_content_add_paper {
+    display: flex;
+    flex: 1;
+    flex-direction: row !important;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5em;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.file_settings {
+    & {
+        background-color: rgb(36, 36, 36);
+        padding: 1em;
+        border-radius: 5px;
+        display: flex;
+        gap: 1em;
+        flex-direction: column;
+    }
+    .row {
+        display: flex;
+        gap: 1em;
+    }
+}
+
+.add_paper {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1em;
+}
+
+.paper {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    background-color: rgb(36, 36, 36);
+    border-radius: 5px;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.not_found_papers {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.5em;
+    justify-content: center;
+}
