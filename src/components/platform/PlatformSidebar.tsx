@@ -8,10 +8,10 @@ export function PlatformSidebar(args: any) {
                 <Book />
                 Papers
             </Link>
-            <a className='sidebar-item'>
+            <Link href={'/platform/journals'} className='sidebar-item'>
                 <BookOpen />
                 Journals
-            </a>
+            </Link>
             <a className='sidebar-item'>
                 <Search />
                 Explore

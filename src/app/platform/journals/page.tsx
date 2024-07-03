@@ -1,15 +1,17 @@
-import '@/css/platform/papers/add.css'
+import '@/css/platform/journals/journals.css'
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 import * as jwt from "jose"
 import * as crypto from "crypto"
 import { db } from "@/db/db"
-import { account, paper } from "@/db/schema"
+import { account, journal, paper } from "@/db/schema"
 import { eq } from "drizzle-orm"
 import { PlatformNavbar } from '@/components/platform/PlatformNavbar'
 import { PlatformSidebar } from '@/components/platform/PlatformSidebar'
+import Link from 'next/link'
+import { Button } from '@mantine/core'
 
-export default async function Papers(args: any) {
+export default async function Journals(args: any) {
     // Get cookies
     let token = cookies().get('horizon_token')
     if (token == undefined) {
@@ -30,7 +32,7 @@ export default async function Papers(args: any) {
             redirect('/platform/?welcome=true')
         }
     }
-    let papers = await db.select().from(paper).where(eq(paper.owner_id, account_info[0].id))
+    let journal_information = await db.select().from(journal)
     return (
         <div className="container">
             <PlatformNavbar profileInfo={{
@@ -42,15 +44,26 @@ export default async function Papers(args: any) {
             }} />
             <div className="platform_body">
                 <PlatformSidebar />
-                <main className='platform_content_add_paper'>
-                    {papers.map((paper: any) => {
-                        return (
-                            <div className="paper" key={paper}>
-                                <h1>{paper.title}</h1>
-                                <a href={paper.file_url}>View</a>
+                <main className='platform_content_journals'>
+                    {journal_information.length >0 ? (
+                        <>
+                            <div className='journals'>
+
+                            {/* <Link href={''} className='journal_card' style={{backgroundImage: `url("URL_HERE")`, backgroundSize: 'cover'}}>
+                                <h1></h1>
+                            </Link> */}
+                            </div>
+                        </>
+                        ) : (
+                            <div className='journals_not_found'>
+                                <h1>Journals could not be found.</h1>
+                                <p>Why not create one?</p>
+                                <Button component={Link} href={'/platform/journals/create'} className='create_journal'>
+                                    Create Journal
+                                </Button>
                             </div>
                         )
-                    })}
+                    }
                 </main>
             </div>
         </div>

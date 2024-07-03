@@ -29,3 +29,19 @@ export const paper = orisSchema.table('paper', {
     terms_of_service: text('terms_of_service'),
     owner_id: serial('owner_id'),
 })
+
+export const paper_review = orisSchema.table('paper_review', {
+    id: serial('id').primaryKey(),
+    paper_id: serial('paper_id'),
+    reviewer_id: serial('reviewer_id'),
+    review: text('review'),
+    score: serial('score'),
+})
+
+export const journal = orisSchema.table('journal', {
+    id: serial('id').primaryKey(),
+    name: text('name'),
+    description: text('description'),
+    field: text('field'),
+    owner_id: serial('owner_id'),
+})

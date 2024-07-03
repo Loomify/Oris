@@ -20,7 +20,7 @@ export default function PaperStorage(args: any) {
             return (
                 <div className="not-found">
                     <h1>File not found.</h1>
-                    <p>It seems that the file that you were attempting to find could not be found.</p>
+                    <p>The file that you were attempting to find could not be found.</p>
                 </div>
             )
         }
@@ -28,7 +28,7 @@ export default function PaperStorage(args: any) {
         return (
             <div className="not-found">
                 <h1>File storage method not supported.</h1>
-                <p>It seems that the file storage method that the server is using is not supported by the platform. Please do not rely on this route for file storage.</p>
+                <p>The current file storage method that the server is using is not supported by the platform. Please do not rely on this route for file storage.</p>
             </div>
         )
     }

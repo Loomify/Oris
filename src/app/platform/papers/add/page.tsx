@@ -12,7 +12,7 @@ import { Button, Checkbox, FileInput, TextInput } from '@mantine/core'
 import { UploadPaper } from '@/components/platform/papers/UploadPaper'
 import { uploadFiles } from '@/lib/uploadFiles'
 
-export default async function Profile(args: any) {
+export default async function AddPapers(args: any) {
     // file upload handler
     async function fileUploadHandler(data: FormData) {
         'use server'

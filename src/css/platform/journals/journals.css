@@ -1,0 +1,61 @@
+body {
+    background-color: rgb(24, 24, 24);
+}
+
+.platform_body {
+    display: flex;
+    flex: 1;
+}
+
+.platform_content_journals {
+    display: flex;
+    flex: 1;
+    flex-direction: row !important;
+    gap: 2.5em;
+    align-items: center;
+}
+
+.journals {
+    display: inline-grid;
+    grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
+    gap: 1em;
+    width: 100%;
+    padding: 1em;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.journal_card {
+    & {
+        display: flex;
+        flex-direction: column;
+        background-color: rgb(32, 32, 32);
+        height: 300px !important;
+        align-self: center;
+        border-radius: 5px;
+        padding: 1em;
+        width: 225px;
+        border-radius: 10px;
+        align-items: center;
+        margin: auto;
+        transition: 500ms;
+    }
+    &:hover {
+        transition: 500ms;
+
+        transform: scale(1.025);
+    }
+}
+
+.journals_not_found {
+    background-color: rgb(27, 27, 27);
+    border-radius: 10px;
+    padding: 1em;
+    font-family: 'DMSans';
+    font-size: 1.5em;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    gap: 0.5em;
+}
