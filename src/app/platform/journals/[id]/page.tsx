@@ -45,6 +45,11 @@ export default async function Journal(args: any) {
     editions.sort((a: any, b: any) => {
         return new Date(b.edition_date).getTime() - new Date(a.edition_date).getTime()
     })
+
+    if (journal_information[0].field == null || journal_information[0].image_url == null || journal_information[0].description == null || journal_information[0].name == null) {
+        await db.delete(journal).where(eq(journal.id, args.params.id))
+        redirect('/platform/journals')
+    }
     return (
         <div className="container">
             <PlatformNavbar profileInfo={{
