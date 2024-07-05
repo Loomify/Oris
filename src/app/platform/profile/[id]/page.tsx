@@ -4,7 +4,7 @@ import { redirect } from "next/navigation"
 import * as jwt from "jose"
 import * as crypto from "crypto"
 import { db } from "@/db/db"
-import { account } from "@/db/schema"
+import { account, journal, paper } from "@/db/schema"
 import { eq } from "drizzle-orm"
 import Link from 'next/link'
 import { PlatformNavbar } from '@/components/platform/PlatformNavbar'
@@ -28,6 +28,14 @@ export default async function ProfileIdentity(args: any) {
         // grab profile info
         // @ts-ignore
         let profile_info = await db.select().from(account).where(eq(account.id, parseInt(args.params.id)))
+        let papers = await db.select().from(paper).where(eq(paper.owner_id, parseInt(args.params.id)))
+        let journal_count = 0
+        for (let i = 0; i < papers.length; i++) {
+            let journal_info = await db.select().from(journal).where(eq(journal.id, papers[i].journal_id))
+            if (journal_info.length != 0) {
+                journal_count++
+            }
+        }
         if (profile_info.length == 0) {
         return (
                     <div className="container">
@@ -74,6 +82,23 @@ export default async function ProfileIdentity(args: any) {
                         {/* <hr className='vertical_row' /> */}
                         <div className='profile_right'>
                             <h2>Research</h2>
+                            <h3>Statistics:</h3>
+                            <p>Published {papers.length} papers onto the platform in {journal_count} journals.</p>
+                            <br />
+                            <h3>Publications:</h3>
+                            {(papers.length == 0) ? <h4>No papers were uploaded by {profile_info[0].first_name} onto the platform.</h4> : (<>
+                                <div className='papers'>
+                                    {papers.map((paper: any) => {
+                                        return (
+                                            <div className='paper' key={paper}>
+                                                <h2>{paper.title}</h2>
+                                                <p>By {paper.authors}</p>
+                                                <Button color='blue' component={Link} href={`/platform/papers/${paper.id}`}>View</Button>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            </>)}
                         </div>
                     </main>
                 </div>
@@ -83,6 +108,14 @@ export default async function ProfileIdentity(args: any) {
         // @ts-ignore
         // @ts-ignore
         let profile_info = await db.select().from(account).where(eq(account.id, parseInt(args.params.id)))
+        let papers = await db.select().from(paper).where(eq(paper.owner_id, parseInt(args.params.id)))
+        let journal_count = 0
+        for (let i = 0; i < papers.length; i++) {
+            let journal_info = await db.select().from(journal).where(eq(journal.id, papers[i].journal_id))
+            if (journal_info.length != 0) {
+                journal_count++
+            }
+        }
         if (profile_info.length == 0) {
         return (
                     <div className="container">
@@ -128,6 +161,23 @@ export default async function ProfileIdentity(args: any) {
                         {/* <hr className='vertical_row' /> */}
                         <div className='profile_right'>
                             <h2>Research</h2>
+                            <h3>Statistics:</h3>
+                            <p>Published {papers.length} papers onto the platform in {journal_count} journals.</p>
+                            <br />
+                            <h3>Publications:</h3>
+                            {(papers.length == 0) ? <h4>No papers were uploaded by {profile_info[0].first_name} onto the platform.</h4> : (<>
+                                <div className='papers'>
+                                    {papers.map((paper: any) => {
+                                        return (
+                                            <div className='paper' key={paper}>
+                                                <h2>{paper.title}</h2>
+                                                <p>By {paper.authors}</p>
+                                                <Button color='blue' component={Link} href={`/platform/papers/${paper.id}`}>View</Button>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            </>)}
                         </div>
                     </main>
                 </div>

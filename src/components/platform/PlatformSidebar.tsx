@@ -1,6 +1,6 @@
 import '@/css/components/platform/platform_sidebar.css'
 import Link from 'next/link'
-import { Book, BookOpen, Bookmark, Search } from 'react-feather'
+import { Book, BookOpen, Bookmark, Search, Settings, User } from 'react-feather'
 export function PlatformSidebar(args: any) {
     return (
         <div className="sidebar">
@@ -12,14 +12,14 @@ export function PlatformSidebar(args: any) {
                 <BookOpen />
                 Journals
             </Link>
-            <a className='sidebar-item'>
-                <Search />
-                Explore
-            </a>
-            <a className='sidebar-item'>
-                <Bookmark />
-                Saved
-            </a>
+            <Link href={'/platform/profile'} className='sidebar-item'>
+                <User />
+                Profile
+            </Link>
+            <Link href={'/platform/settings'} className='sidebar-item'>
+                <Settings />
+                Settings
+            </Link>
         </div>
     )
 }
