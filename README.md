@@ -4,8 +4,10 @@
 Oris is a platform that aims to make research more accessible and collaborative without the headaches associated with traditional platforms. This current repository is the source code for the platform as the server, which you will need to initialize and set up if you would like to run your own Oris server. The program is under the AGPLv3 license for anyone interested in using the code for their purposes.
 
 ## Current features
-- **Authentication**: Users can register and create an account to access the platform as a whole.
-- More coming soon.
+- **Authentication**
+- **Settings**
+- **Uploading Papers**
+- **Adding Papers to a Journal**
 
 ## Running your own Oris
 
@@ -15,15 +17,14 @@ Oris is a platform that aims to make research more accessible and collaborative 
 - File storage medium, such as local storage or Vercel Blob.
 
 ### Steps
-To get started, you will need to clone this repository and install all dependencies seen in the package.json file, which you can do by running ``npm install``. After that, you will need to make a PostgreSQL server and a database and name it whatever you would like since Oris utilizes Postgres as the primary database and note all the connection information down. You will then need to utilize the connection information into the necessary variables by creating a .env file, with you needing to explicitly use the variable names from .env.example.
+To get started, you must clone this repository and install all dependencies seen in the package.json file, which you can do by running ``npm install``. After that, you will need to make a PostgreSQL server and a database and name it whatever you would like since Oris utilizes Postgres as the primary database and note all the connection information down. You will then need to utilize the connection information into the necessary variables by creating a .env file, with you needing to use the variable names from .env.example explicitly.
 
-You will also have additional variables to consider for the file storage medium, such as local storage or Vercel Blob. You will need to set the environment variables for the medium appropriately depending on your medium so the adapter can work correctly.
+You will also have additional variables for the file storage medium, such as local storage or Vercel Blob. You will need to set the environment variables for the medium appropriately depending on your medium so the adapter can work correctly.
 
 The supported file storage mediums are:
 - Local storage, denoted as ```
 file_storage_method = "local"
-file_storage_path = "STORAGE_PATH"
-```
+file_storage_path = "STORAGE_PATH"```
 - Vercel Blob, denoted as ```
 file_storage_method = "vercel"
 BLOB_READ_WRITE_TOKEN="BLOB_READ_WRITE_TOKEN"
